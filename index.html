@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MyFRIEND Interactive Prototype</title>
+<style>
+:root{
+  --bg:#f6f7fb;--card:#fff;--text:#1f2937;--muted:#6b7280;--border:#e5e7eb;
+  --blue:#2563eb;--blue2:#eff6ff;--green:#16a34a;--green2:#ecfdf5;--yellow:#f59e0b;--yellow2:#fffbeb;--red:#dc2626;
+  --shadow:0 18px 45px rgba(15,23,42,.10);--radius:22px;
+}
+*{box-sizing:border-box} body{margin:0;font-family:Inter,Arial,Helvetica,sans-serif;background:linear-gradient(135deg,#f8fafc,#eef2ff);color:var(--text)}
+.app{max-width:1280px;margin:28px auto;padding:0 22px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}.brand{display:flex;gap:12px;align-items:center}.logo{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,#2563eb,#16a34a);box-shadow:var(--shadow)}h1{font-size:24px;margin:0}.subtitle{font-size:13px;color:var(--muted);margin-top:4px}.layout{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:22px}.card{background:rgba(255,255,255,.92);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow)}.main{padding:34px;min-height:650px}.side{padding:24px;min-height:650px;position:sticky;top:20px}.badge{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;font-size:13px;font-weight:700}.badge.question{background:var(--yellow2);color:#92400e}.badge.action{background:var(--green2);color:#166534}.badge.info{background:var(--blue2);color:#1e40af}.title{font-size:36px;line-height:1.15;margin:20px 0 12px}.desc{font-size:17px;color:#4b5563;line-height:1.65;max-width:780px}.questionBox{background:var(--yellow2);border:1px solid #fde68a;border-radius:20px;padding:28px;margin-top:28px}.actionBox{background:var(--green2);border:1px solid #bbf7d0;border-radius:20px;padding:28px;margin-top:28px}.questionText,.actionText{font-size:26px;line-height:1.32;font-weight:800;margin:0}.criteriaBox{background:#fff;border:1px solid #f3d98b;border-radius:18px;padding:22px;margin-top:18px}.criteriaBox h3{margin:0 0 12px;font-size:20px;color:#78350f}.criteriaBox .modalContent{font-size:15px}.criteriaBox ol{margin-bottom:0}.examplesLanding{background:#fff;border:1px solid var(--border);border-radius:20px;padding:26px;margin-top:24px}.hint{margin-top:14px;color:#6b7280;line-height:1.6}.btns{display:flex;gap:14px;flex-wrap:wrap;margin-top:28px}.btn{border:0;border-radius:14px;padding:13px 20px;font-size:15px;font-weight:800;cursor:pointer;transition:.18s transform,.18s box-shadow,.18s background}.btn:hover{transform:translateY(-1px);box-shadow:0 10px 25px rgba(15,23,42,.12)}.primary{background:var(--blue);color:#fff}.yes{background:#16a34a;color:#fff}.no{background:#dc2626;color:#fff}.ghost{background:#f3f4f6;color:#374151}.light{background:#fff;border:1px solid var(--border);color:#374151}.progress{height:10px;background:#e5e7eb;border-radius:99px;overflow:hidden;margin:18px 0 10px}.bar{height:100%;background:linear-gradient(90deg,#2563eb,#16a34a);width:0;transition:.25s}.progressText{font-size:13px;color:#6b7280}.side h2{font-size:18px;margin:0 0 18px}.path{display:flex;flex-direction:column;gap:12px}.pathItem{border-left:4px solid #d1d5db;padding:10px 0 10px 14px}.pathItem.done{border-left-color:#16a34a}.pathItem.current{border-left-color:#2563eb;background:#eff6ff;border-radius:0 12px 12px 0}.pathSection{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:#6b7280;font-weight:800}.pathQ{font-size:14px;line-height:1.35;margin-top:4px}.pathA{display:inline-block;margin-top:7px;padding:4px 9px;border-radius:999px;background:#f3f4f6;font-size:12px;font-weight:800}.pathA.y{background:#dcfce7;color:#166534}.pathA.n{background:#fee2e2;color:#991b1b}.empty{color:#9ca3af;font-size:14px;line-height:1.5}.summaryList{margin:18px 0 0;padding:0;list-style:none}.summaryList li{padding:12px 0;border-bottom:1px solid var(--border);line-height:1.45}.summaryList b{color:#111827}.modalBackdrop{position:fixed;inset:0;background:rgba(15,23,42,.45);display:none;align-items:center;justify-content:center;padding:24px;z-index:50}.modal{background:#fff;border-radius:24px;box-shadow:0 25px 80px rgba(15,23,42,.28);width:min(850px,96vw);max-height:86vh;overflow:auto;padding:30px}.modalHeader{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;border-bottom:1px solid var(--border);padding-bottom:16px;margin-bottom:18px}.modal h3{font-size:24px;margin:0}.modalContent{font-size:15.5px;line-height:1.7;color:#374151}.modalContent p{margin:0 0 14px}.modalContent ol,.modalContent ul{margin-top:8px}.glossaryTable{width:100%;border-collapse:collapse;margin-top:6px;font-size:14px}.glossaryTable th,.glossaryTable td{border:1px solid var(--border);padding:12px 14px;text-align:left;vertical-align:top;line-height:1.55}.glossaryTable th{background:#f3f4f6;color:#111827;font-weight:800;position:sticky;top:0}.glossaryTable td:first-child{width:28%;font-weight:800;color:#1f2937;background:#f8fafc}.glossaryNote{font-size:13px;color:#6b7280;margin-top:14px}.close{background:#f3f4f6;border:0;border-radius:12px;padding:9px 12px;font-weight:800;cursor:pointer}.footerNote{margin-top:22px;font-size:12px;color:#9ca3af}.pillRow{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}.pill{background:#f3f4f6;border-radius:999px;padding:7px 10px;font-size:12px;color:#4b5563;font-weight:700}.summaryBox{background:#fff;border:1px solid var(--border);border-radius:18px;padding:22px;margin-top:22px}.summaryBox h3{margin:0 0 16px;font-size:22px}.summaryCard{border-radius:16px;padding:18px 20px;margin-top:14px}.summaryCard h4{margin:0 0 9px;font-size:16px}.summaryCard p{margin:0;font-size:15px;line-height:1.65;color:#374151}.summaryActionCard{background:var(--green2);border:1px solid #bbf7d0}.summaryActionCard h4{color:#166534}.summaryReassessCard{background:var(--blue2);border:1px solid #bfdbfe}.summaryReassessCard h4{color:#1e40af}.summaryReassessCard p{margin:0 0 10px}.summaryReassessCard p:last-child{margin-bottom:0}.reassessBox{background:#f8fafc;border:1px solid var(--border);border-radius:18px;padding:22px;margin-top:22px}.reassessBox h3,.examplesBox h3{margin:0 0 10px;font-size:20px}.reassessBox p{font-size:15.5px;line-height:1.65;color:#374151;margin:0}.examplesBox{background:#fff;border:1px solid var(--border);border-radius:18px;padding:22px;margin-top:22px}.caseGrid{display:grid;grid-template-columns:1fr;gap:10px;margin-top:14px}.caseBtn{text-align:left;background:#f8fafc;border:1px solid var(--border);border-radius:14px;padding:14px 16px;font-weight:800;color:#1f2937;cursor:pointer}.caseBtn:hover{background:#eff6ff;border-color:#bfdbfe}.caseContent{margin-top:20px;max-height:520px;overflow:auto;padding:18px;background:#f8fafc;border:1px solid var(--border);border-radius:18px}.caseContent h3{font-size:24px;margin:0 0 16px}.caseContent h4{font-size:17px;margin:22px 0 8px;color:#111827}.caseContent p{font-size:15px;line-height:1.65;margin:0 0 8px;color:#374151}.caseContent .caseBullet{margin-top:12px;color:#111827}@media(max-width:980px){.layout{grid-template-columns:1fr}.side{position:relative}.title{font-size:30px}.questionText,.actionText{font-size:22px}}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="top">
+    <div class="brand"><div class="logo"></div><div><h1>MyFRIEND Interactive Tool</h1><div class="subtitle">Multimorbidity management FRamework for guIdEliNe-based Decision support</div></div></div>
+    <div class="btns" style="margin-top:0">
+      <button class="btn light" onclick="openModal('Glossary', glossary)">Glossary</button>
+      <button class="btn ghost" onclick="restart()">Restart</button>
+    </div>
+  </div>
+  <div class="layout">
+    <main class="card main" id="main"></main>
+    <aside class="card side"><h2 id="sideTitle">Decision Path</h2><div id="path" class="path"></div><div class="footerNote">Use Back to revise the previous answer. Restart clears all selections.</div></aside>
+  </div>
+</div>
+<div class="modalBackdrop" id="modalBackdrop" onclick="backdropClose(event)"><div class="modal"><div class="modalHeader"><h3 id="modalTitle"></h3><button class="close" onclick="closeModal()">Close</button></div><div id="modalContent" class="modalContent"></div></div></div>
+<script>
+const generalPrinciples = `
+<p>We avoid the use of terms such as “patient” that imply having a diagnosed condition, and use instead terms such as “individual” or “healthcare seeker”. By “healthcare professionals”, we mean all professionals providing health services, including but not limited to clinicians, surgeons, nurses, pharmacists, psychologists, and nursing home staff.</p>
+<p>MyFRIEND is intended for healthcare professionals at any healthcare facility and situation, including primary care, secondary and tertiary hospitals, and facilities such as residential nursing homes. The framework covers situations related to both overall health management and the management of specific chronic and acute diseases and conditions.</p>
+<p>Regardless of whether guidelines are available and applicable, all healthcare decisions should be made jointly by healthcare professionals and healthcare seekers, accounting for the individual’s health status, preferences, values, and the available guidelines or research evidence.</p>
+<p>MyFRIEND provides aspirational guidance on how to use guidelines optimally in decision-making related to multimorbidity care. Some obstacles may remain in practice, including healthcare professionals’ capabilities and the resources and policies of health facilities or regions. These obstacles should be addressed in future decision-making processes, but they are not considered in this framework.</p>`;
+const glossary = `
+<table class="glossaryTable">
+<thead><tr><th>Term</th><th>Explanation</th></tr></thead>
+<tbody>
+<tr><td>Health</td><td>A state of complete physical, mental and social well-being, not merely the absence of disease or infirmity.</td></tr>
+<tr><td>Multimorbidity*</td><td>Co-existence of two or more chronic conditions in an individual.</td></tr>
+<tr><td>Comorbidity</td><td>Other chronic health conditions of a multimorbid individual than the primary target condition.</td></tr>
+<tr><td>Multimorbidity management</td><td>A broad term that means taking multimorbidity into account during the healthcare process. This may involve medication review, enhancing shared decision-making between healthcare professionals and healthcare seekers, and interprofessional collaboration between different specialists. Ideally, health-centred guidelines/guidances should define and address the different aspects of multimorbidity management in their recommendations.</td></tr>
+<tr><td>Primary target condition</td><td>The condition that is the main disease or infirmity of the individual at present, where applicable. The focus may also be on the individual’s health rather than any disease. This may be either an acute or chronic condition.</td></tr>
+<tr><td>Guideline</td><td>A statement that includes recommendations intended to optimize patient care, informed by a systematic review of evidence and an assessment of the benefits and harms of alternative care options.</td></tr>
+<tr><td>Guidance</td><td>A guideline-like document, such as a consensus statement, that includes recommendations intended to inform clinical or other health practice. In this framework, “guidance” particularly refers to documents that do not fulfil the definition of “guideline” above. Guidance can inform healthcare practice but should be interpreted with caution.</td></tr>
+<tr><td>Recommendation</td><td>A concise operational statement formed to answer a clinical question and inform decision-making; recommendations are the core content of guidelines and guidances.</td></tr>
+<tr><td>Health-centred multimorbidity guideline/guidance</td><td>A guideline or guidance with recommendations that focus on the individual’s overall health rather than any specific disease. This type aims to promote shared decision-making, establish long-term management principles or plans through comprehensive health assessment, and improve quality of life. It guides coordination of the management of all diseases and conditions.</td></tr>
+<tr><td>Disease-centred multimorbidity guideline/guidance</td><td>A guideline or guidance with recommendations that focus on the management of a specific combination of diseases or conditions, such as hypertension with diabetes.</td></tr>
+<tr><td>Single-disease guideline/guidance</td><td>A guideline or guidance with recommendations that focus on one disease, such as hypertension. These documents may include recommendations addressing the impact of, or interaction with, comorbidities, but this is not necessarily the case.</td></tr>
+<tr><td>The Ariadne principle</td><td>A patient-centred, structured approach to clinical decision-making for individuals with multiple chronic conditions. It acts as a “thread” helping healthcare professionals and healthcare seekers navigate the complex combination of diagnoses, treatments, guidelines, and individual priorities.</td></tr>
+</tbody>
+</table>
+<p class="glossaryNote">* The term “multimorbidity” is used consistently in this framework, although alternatives such as “multiple long-term conditions” may sometimes be more accurate. The definition follows the World Health Organization, while other definitions emphasizing different aspects also exist.</p>`;
+
+const box1 = `
+<p><b>List of factors that may suggest that the individual may benefit from multimorbidity management.</b></p>
+<p>Multimorbidity should be considered in the care if the individual fulfils any of the following conditions:</p>
+<ol><li>Has two or more chronic health conditions, regardless of whether they are physical or mental.</li><li>Has difficulties in managing their treatments, for example multiple regular medications.</li><li>Has reduced functional capabilities, for example related to frailty or risk of falls.</li><li>Receives health care from two or more providers.</li></ol>
+<p><i>Note:</i> “Multiple regular medications”, also called “polypharmacy”, may have different definitions in different facilities. No fixed medicine-number threshold is specified here.</p>`;
+const box2 = `
+<p><b>General features that contribute to the applicability of disease-centred multimorbidity guidelines.</b></p>
+<ol><li>The recommendations should properly address multimorbidity.</li><li>The guideline should be up-to-date, reliable and of high quality.</li><li>The recommendations should be applicable.</li><li>The recommendations should be feasible.</li><li>The recommendations should be acceptable.</li></ol>`;
+
+const reassessmentText = `
+<p>All individuals need to be monitored and followed up regularly after finishing the present episode of care. Whenever there is a major change in the individual’s health situation, healthcare workers should reassess the management approach. For example, if an individual who was previously not affected by (or at risk of) multimorbidity develops new conditions or risk factors, one should evaluate the need of multimorbidity management again, starting from the beginning of this framework. If a previously multimorbid patient develops a new chronic condition, the use of guidelines/guidances should also be re-evaluated, starting from checking whether the combination with the new condition is covered by the guidelines/guidance used, or if specific guidelines or recommendations for the new extended combination exist. All guidelines/guidances used in the care should be suitable and of high quality (please see Box 2 and its explanation).</p>
+`;
+const caseContents = {
+  case1: `<h3>Case 1</h3>
+<p class="caseBullet"><b>Care setting</b></p>
+<p>Outpatient chronic disease clinic in Europe</p>
+<p>The clinic is familiar with multimorbid patients and has established a general plan to involve differnet specialists</p>
+<p class="caseBullet"><b>Patient</b></p>
+<p>Male, 68 years old</p>
+<p>Lives with his wife</p>
+<p>Retired</p>
+<p>Independent in daily activities and manages his own medications</p>
+<p>Walks regularly for exercise</p>
+<p>No known cognitive impairment.</p>
+<p class="caseBullet"><b>Medical history</b></p>
+<p>Type 2 diabetes mellitus (10 years)</p>
+<p>Coronary artery disease (previous myocardial infarction)</p>
+<p>Hypertension</p>
+<p class="caseBullet"><b>Reason for visit</b></p>
+<p>Scheduled 6-month follow-up visit at general practitioner to discuss the patient’s overall health</p>
+<p>Patient’s main concern: “I am taking several medications. Do I still need all of them?”</p>
+<p class="caseBullet"><b>Current medications</b></p>
+<p>Metformin + SGLT2 inhibitor</p>
+<p>ACE inhibitor</p>
+<p>Beta-blocker</p>
+<p>High-intensity statin</p>
+<p>Low-dose aspirin</p>
+<p class="caseBullet"><b>Current clinical status</b></p>
+<p>HbA1c: 7.5% (above target)</p>
+<p>Blood pressure: 135/80 mmHg (Systolic blood pressure is higher than the target)</p>
+<p>LDL cholesterol: 1.9 mmol/L (above target)</p>
+<p>No recent angina</p>
+<p>No episodes of hypoglycemia</p>
+<h4>Should multimorbidity management be considered for this individual?</h4>
+<p>The patient has three chronic health conditions: type 2 diabetes, coronary artery disease, and hypertension, which fulfills the definition of multimorbidity and the first factor of Box 1 (has two or more chronic health conditions (regardless of whether they are physical or mental)). Therefore, multimorbidity should be taken into account in the patient’s care (Yes).</p>
+<h4>Has a plan or general approach for multimorbidity management already been established?</h4>
+<p>The patient has a routine follow-up appointment a clinic, which implies he is already in care. The clinic is familiar with managing multimorbid patients. (Yes)</p>
+<h4>Is there a disease-centered multimorbidity guideline/guidance or recommendations for the relevant combination of conditions?</h4>
+<p>A rapid literature search found the guideline for the management of cardiovascular disease in patients with diabetes developed by European Society of Cardiology (ESC), released in 2023 [1]. This guideline includes recommendations for the management of hypertension and coronary artery disease in patients with diabetes. (Yes)</p>
+<h4>Are the existing guidelines/guidances suitable?</h4>
+<p>This guideline provides comprehensive recommendations for managing cardiovascular disease in patients with diabetes [1]. Since the guideline is restricted to individuals with these two conditions and hypertension as a common comorbidity is also taken into account in the recommendations, the guideline clearly addresses multimorbidity properly as required in Box 2. It was developed in accordance with ESC policies and procedures which can be seen as a guarantor for its reliability and applicability to the European population. The guideline was released in 2023, which is (as of 2026) within the recommended 3-5-year validity window and can be considered up to date. (Yes).</p>
+<h4>Use primarily recommendations from the guideline/guidance, together with clinical judgement and consideration of patients&#x27; values and preferences, to make decisions</h4>
+<p>The ESC guideline effectively informs risk stratification, target setting, and pharmacological optimization, and can serve as the primary basis for integrated management [1]. However, clinical judgement is essential for tailoring treatment intensity, considering polypharmacy and potential interactions, and assessing overall health status. Decisions should also be made in a shared manner, incorporating the patient’s values and preferences, to ensure that the management plan is both evidence-based and patient-centered; for patients with advanced disease or frailty, care priorities may shift toward symptom management or advance care planning, but in this case, intensive risk reduction remains appropriate. For example, as the patient is concerned about his pill burden, a medication review (as recommended by many health-centered multimorbidity guidelines) can be helpful to decide whether all treatments are necessary.</p>
+<h4>Reassess the situation regularly or whenever there is a change in the conditions</h4>
+<p>Although the patient is currently stable, regular monitoring of glycemic, blood pressure, and lipid control, renal disease indicators (estimated glomerular filtration rate, urine albumin-to-creatine ratio) as well as medication burden and tolerance, remains essential. If clinical deterioration or new conditions (e.g., heart failure or chronic kidney disease) develop, the management plan should be reassessed and relevant additional guidelines incorporated as appropriate.</p>
+<h4>Reference</h4>
+<p>Marx N, Federici M, Schütt K, et al. 2023 ESC Guidelines for the management of cardiovascular disease in patients with diabetes. Eur Heart J. 2023;44(39):4043-4140. doi:10.1093/eurheartj/ehad192</p>`,
+  case2: `<h3>Case 2</h3>
+<p class="caseBullet"><b>Care setting</b></p>
+<p>UK National Health Service (NHS) general internal medicine clinic</p>
+<p class="caseBullet"><b>Patient</b></p>
+<p>Female, 76 years old</p>
+<p>Lives alone and manages her own daily activities</p>
+<p>Retired</p>
+<p>Over the past month, she has reduced her usual walking distance due to breathlessness</p>
+<p>No known cognitive impairment</p>
+<p class="caseBullet"><b>Medical history</b></p>
+<p>Chronic obstructive pulmonary diseease (COPD), GOLD stage 3 (diagnosed 5 years ago)</p>
+<p>Heart failure with mildly reduced ejection fraction (HFmrEF), diagnosed 2 years ago</p>
+<p>Previously followed in different outpatient settings.</p>
+<p class="caseBullet"><b>Reason for visit</b></p>
+<p>First consultation at this facility for worsening symptoms: worsening shortness of breath and new bilateral lower limb oedema over 2 weeks.</p>
+<p>Patient’s main concern: “I feel more breathless than usual. Is my lung disease getting worse?”</p>
+<p class="caseBullet"><b>Current medications</b></p>
+<p>Long-acting muscarinic antagonist (LAMA)</p>
+<p>Short-acting salbutamol inhaler (as needed)</p>
+<p>Furosemide</p>
+<p>Bisoprolol</p>
+<p class="caseBullet"><b>Current clinical status</b></p>
+<p>Progressive shortness of breath over 3 weeks</p>
+<p>Bilateral lower limb oedema</p>
+<p>Increased fatigue</p>
+<p>Occasional cough and mild wheezing</p>
+<p>No recent spirometry or echocardiography within the past year</p>
+<p>No recent tests for renal function within the past year</p>
+<p>Medication adherence uncertain</p>
+<h4>Should multimorbidity management be considered for this individual?</h4>
+<p>The patient has two chronic health conditions: COPD and HFmrEF, which fulfills most definitions of multimorbidity and the first factor of Box 1 (has two or more chronic health conditions (regardless of whether they are physical or mental)). Therefore, multimorbidity should be taken into account in the patient’s care (Yes).</p>
+<h4>Has a plan or general approach for multimorbidity management already been established?</h4>
+<p>The patient was previously followed up in different clinics and we can thus assume that no individual plan has been yet. We will also assume that the clinic has no general plan. (No)</p>
+<h4>Is there a health-centered guideline/guidance applicable for the setting?</h4>
+<p>The patient is in the UK. NICE (the national health technology assessment body of England) has published a guideline for multimorbidity, which is thus well applicable in the UK health system [1]. (Yes)</p>
+<h4>Follow the health-centered multimorbidity guideline/guidance to coordinate the care</h4>
+<p>Since a suitable guideline exists, it can be used as the basis for managing the multimorbidity aspects in the patient’s care [1]. This guideline can be consulted for questions such as the collaboration of different specialists and health professionals, setting up treatment targets, considering patient’s preferences, and reducing the treatment burden.</p>
+<h4>Is there a disease-centered multimorbidity guideline/guidance or recommendations for the relevant combination of conditions?</h4>
+<p>A rapid literature search did not find a guideline specifically written for the combination of COPD and heart failure. However, individual recommendations for this combination can be found in the Global Initiative for Chronic Obstructive Lung Disease (GOLD) Global Strategy for the Diagnosis, Management, and Prevention of COPD, an authoritative international guidance document for COPD [2]; as well as in the NICE guideline on chronic heart failure [4]. (Yes)</p>
+<h4>Are the existing guidelines/guidances suitable?</h4>
+<p>The GOLD guidance recognizes that heart failure is common among COPD patients, and mentions that cardioselective betablockers (commonly prescribed to patients with chronic heart failure) should not be withheld in COPD patients with heart failure [2]. Similarly, the NICE chronic heart failure guideline mentions in the recommendation considering betablockers that certain comorbidities, including COPD, should not be a reason for withholding betablocker treatment [3]. Therefore, the scope of both recommendations is very narrow and considers only one type of treatment. This contradicts the first factor of Box 2 – the recommendations should properly address multimorbidity – they mention the comorbidity as a potential risk factor but do not give extensive guidance for treating this combination of diseases. These recommendations should be considered, however they are not alone sufficient to guide the care from the multimorbidity aspect (No).</p>
+<h4>Are there existing guidelines/guidances for all diseases and conditions of the individual?</h4>
+<p>The guidances mentioned above are primarily single-disease guidelines addressing COPD and heart failure, respectively [2,3]. In addition, NICE has published a guideline on COPD [4]. Therefore, there exist guidelines for both conditions (Yes).</p>
+<h4>Could there be possible interactions/conflicts between recommendations?</h4>
+<p>Systemic corticosteroids and beta-agonists are recommended under certain circumstances for patients with COPD. Long-acting bronchodilators (LABA and/or LAMA) are also generally well tolerated in patients with concomitant heart failure. However, corticosteroids, particularly with prolonged use, may promote fluid retention and worsen heart failure. Beta-agonists may aggravate heart failure by causing tachycardia and increasing the risk of arrhythmia. For HFmrEF, guidelines recommend generally a beta-blocker, an ACE inhibitor or ARB (or ARNI), and a mineralocorticoid receptor antagonist. Cardioselective beta-blockers are generally considered safe and are recommended for treating heart failure. However, non-selective beta-blockers may exacerbate bronchoconstriction in COPD, although certain agents (e.g., carvedilol) are recommended for heart failure. Loop diuretics (commonly prescribed for heart failure) and beta-agonists (for COPD) may increase the risk of hypokalemia and arrhythmia when used concomitantly. (Yes)</p>
+<h4>Make decisions based on multiple considerations referring to different guidelines, other sources and clinical experience, paying attention to any potential conflicts or interactions.</h4>
+<p>The existing guidelines do not give clear instructions to how COPD and chronic heart failure should be treated together. The guidelines suggest that cardioselective betablockers are safe to use, but for most other recommended treatments – including some that the patient is receiving (LAMA, salbutamol, furosemide) – there is a risk of interactions or harmful effects. The clinicians should first assess whether the shortnes of breath is due to heart failure or COPD, using spirometry, echocardiography, or BNP, before reconsidering COPD treatment. The prescription of any agonists needs to be thoroughly discussed with relevant specialists as well as the patient, giving her clear information about the benefits and risks of the treatments. The treatment against heart failure must also be discussed in a similar way. Since these issues are not covered by the guidelines, the clinicians should refer to other literature to gain more information.</p>
+<h4>Reassess the situation regularly or whenever there is a change in the conditions</h4>
+<p>The patient is elderly and at high risk of multiple diseases. Given the situation, prognosis should be considered when prioritizing management. While she is currently independent, discussions about treatment goals and future care preferences, including Advance Care Planning, may be appropriate if her condition progresses. At follow-up appointments, it is therefore important to discuss any changes to the health situation, and pay attention on any signs that may reflect another comorbidity. If there patient has a suspected or confirmed comorbidity apart from COPD and heart failure, it should be assessed whether and how this new condition and its interactions with the existing comorbidities is covered by guidelines (i.e. re-evaluate the right-hand side of the framework).</p>
+<h4>References</h4>
+<p>National Institute for Health and Care Excellence. Multimorbidity: clinical assessment and management. 2016. https://www.nice.org.uk/guidance/ng56</p>
+<p>Global Initiative for Chronic Obstructive Lung Disease. Global Strategy for the Diagnosis, Management, and Prevention of Chronic Obstructive Pulmonary Disease (2026 Report). 2026. https://goldcopd.org/2025-gold-report/</p>
+<p>National Institute for Health and Care Excellence. Chronic heart failure in adults: diagnosis and management. 2025. https://www.nice.org.uk/guidance/ng106</p>
+<p>National Institute for Health and Care Excellence. Chronic obstructive pulmonary disease in over 16s: diagnosis and management. 2019. https://www.nice.org.uk/guidance/NG115</p>`,
+  case4: `<h3>Case 3</h3>
+<p class="caseBullet"><b>Care setting</b></p>
+<p>Rural primary health clinic in a low-income country</p>
+<p>Limited laboratory and specialist support</p>
+<p class="caseBullet"><b>Patient</b></p>
+<p>Male, 42 years old</p>
+<p>Lives with his family in the village</p>
+<p>Works as a manual labourer and performs all daily activities independently</p>
+<p>Occasionally misses medications due to cost, but able to manage basic self-care</p>
+<p>No known cognitive impairment</p>
+<p class="caseBullet"><b>Medical history</b></p>
+<p>Epilepsy (diagnosed 10 years ago)</p>
+<p>Hypertension (diagnosed 2 years ago)</p>
+<p class="caseBullet"><b>Reason for visit</b></p>
+<p>Spontaneous visit because of frequent headaches and one breakthrough seizure in the past month.</p>
+<p>Patient’s main concern: “I cannot afford many medicines. I need to be able to work safely.”</p>
+<p class="caseBullet"><b>Current medications</b></p>
+<p>Phenobarbital (irregular supply)</p>
+<p>Amlodipine</p>
+<p class="caseBullet"><b>Current clinical status</b></p>
+<p>Blood pressure: 168/98 mmHg</p>
+<p>No access to regular renal function testing</p>
+<p>No recent neurological evaluation</p>
+<p>Reports occasionally missing medication due to cost</p>
+<h4>Should multimorbidity management be considered for this individual?</h4>
+<p>The patient has two chronic conditions: epilepsy and hypertension, which fulfills the definition of multimorbidity and the first factor of Box 1 (has two or more chronic health conditions (regardless of whether they are physical or mental). Since the two conditions are essentially unrelated, this condition may not fulfill some definitions of multimorbidity; nevertheless, even in this situation interactions between treatments or conditions cannot be excluded without a proper assessment. Therefore, multimorbidity should be taken into account in the patient’s care (Yes).</p>
+<h4>Has a plan or general approach for multimorbidity management already been established?</h4>
+<p>The patient does not have a regular physician, and the facility has no electronic medical record system. Therefore, there is no individual plan for this patient. The clinic is severely under-resourced and can only focus on acute conditions; therefore a general plan for the management of patients with multimorbidity has also not been established. (No)</p>
+<h4>Is there a health-centered guideline/guidance applicable for the setting?</h4>
+<p>Recent systematic reviews have identified only few health-centered multimorbidity guidelines. They have all been developed for high- or higher-middle income settings, and none of them can be considered suitable as such for resource-limited settings. (No)</p>
+<h4>Search guidelines/guidances broadly, and select and refer to the most applicable one(s) or in the absence of guidelines, consider developing your own practice statement on how to best coordinate the care of multimorbid patients.</h4>
+<p>Because of the limited time available, the clinic’s staff agree that one clinician does a very rapid review of the summaries of selected health-centered multimorbidity guidelines. The matter is discussed next in the clinic’s internal meeting to agree on a simple approach to consider multimorbidity. The approach takes elements mentioned in existing guidelines but adapted into the context of a resource-limited setting: for example to highlight the patient’s preferences, and to develop ways to seek expert advice e.g. through teleconsultation in complex cases.</p>
+<h4>Is there a disease-centered multimorbidity guideline/guidance or recommendations for the relevant combination of conditions?</h4>
+<p>There is no specific guideline for the combination of epilepsy and hypertension; nor are there recommendations about hypertension in the common epilepsy guidelines or vice versa. (No)</p>
+<h4>Are there existing guidelines/guidances for all diseases and conditions of the individual?</h4>
+<p>The WHO has published a set of recommendations for epilepsy [1] and a guideline hypertension [2]. However, there are no national guidelines in this particular country, or other guidelines that would take into account the setting’s specific challenges. International or foreign guidelines contain assumptions such as access to specialist care and laboratory facilities and undisrupted supply of the essential pharmaceuticals, which are not fulfilled in this setting. The WHO recommendations include also elements that are not regularly available in the setting. Therefore, we consider there are no directly applicable guidelines. (No)</p>
+<h4>Make decisions based on multiple considerations referring to different guidelines, other sources and clinical experience, paying attention to any potential conflicts or interactions.</h4>
+<p>Because of the limited resources, the clinicians prioritize the care according to the patient’s preferences. WHO guidelines are a good reference basis, but their recommendations may also not be fully feasible in this setting [1,2]. Prevention of seizures is the highest priority to ensure the patient’s ability to work safely, therefore the clinician will pay attention to prepare an alternative treatment if there are long-term issues with the availability of phenobarbital. Hypertension control and its interaction with epilepsy treatment can be considered a secondary aim.</p>
+<h4>Reassess the situation regularly or whenever there is a change in the conditions</h4>
+<p>Because of the uncertainties in care, the situation of the patient may change rapidly which needs a reassessment of the guidelines and treatment approaches. In addition, the appearance of any new symptoms or signs of other diseases should be assessed. The clinician and patient will agree about a schedule of regular follow-up visits, which is also important to update on e.g. changes in drug availability.</p>
+<h4>Reference</h4>
+<p>World Health Organization. Evidence-based recommendations for management of epilepsy and seizures in non-specialized health settings. 2026. https://www.who.int/teams/mental-health-and-substance-use/treatment-care/mental-health-gap-action-programme/evidence-centre/epilepsy-and-seizures</p>
+<p>World Health Organization. Guideline for the pharmacological treatment of hypertension in adults. 2021. https://iris.who.int/server/api/core/bitstreams/f062769d-f075-4a00-87af-0a2106e0bd04/content</p>`,
+  case5: `<h3>Case 4</h3>
+<p class="caseBullet"><b>Care setting</b></p>
+<p>Primary healthcare facility in Europe</p>
+<p class="caseBullet"><b>Patient</b></p>
+<p>Female, 37 years old</p>
+<p>Lives alone and works full-time as a graphic designer</p>
+<p>Fully independent in all daily activities and self-manages her health</p>
+<p>No cognitive issues</p>
+<p class="caseBullet"><b>Medical history</b></p>
+<p>Mild seasonal allergic rhinitis</p>
+<p>No other chronic conditions</p>
+<p class="caseBullet"><b>Reason for visit</b></p>
+<p>Visiting GP because of upper respiratory tract infection symptoms lasting for three days (outside of the usual pollen season)</p>
+<p>Patient’s main concern: “I feel unwell and want some treatment or pain relief.”</p>
+<p class="caseBullet"><b>Current medications</b></p>
+<p>None</p>
+<p class="caseBullet"><b>Current clinical status</b></p>
+<p>Fever, sore throat and severe nasal congestion affecting sleep</p>
+<p>No treatments taken</p>
+<h4>Should multimorbidity management be considered for this individual?</h4>
+<p>The patient has one mild chronic condition which is however seasonal and unrelated with the present symptoms. The condition of concern is most likely acute, as the symptoms are very similar to flu or common cold. The patient is also healthy and does not have any known risk factors for multimorbidity. As none of the factors of Box 1 are fulfilled, it is safe to assume that multimorbidity management is not necessary. (No)</p>
+<h4>Follow the common single disease care pathway</h4>
+<p>The management of the patient can be based on the guidelines for treating upper respiratory tract infections.</p>
+<h4>Reassess the situation regularly or whenever there is a change in the conditions</h4>
+<p>When the patient comes for the next visit (either as follow-up of the respiratory infection, or later for another concern), the situation should be reassessed. If any signs of new chronic conditions appear, it should be considered whether multimorbidity management could benefit the individual.</p>`
+};
+const caseTitles = {
+  case1:'Case 1 (Type 2 diabetes mellitus + Coronary artery disease + Hypertension)',
+  case2:'Case 2 (COPD + HFmrEF)',
+  case4:'Case 3 (Epilepsy + Hypertension)',
+  case5:'Case 4 (Mild seasonal allergic rhinitis)'
+};
+const nodes = {
+ welcome:{type:'info',section:'Welcome',title:'Welcome to MyFRIEND',body:`<p>This prototype demonstrates an interactive pathway for using guidelines in multimorbidity-related decision-making. It is intended for demonstration and discussion, not for direct clinical use.</p><p>Regardless of whether guidelines are available and applicable, all healthcare decisions should be made jointly by healthcare professionals and healthcare seekers, accounting for the individual’s health status, preferences, values, and the available guidelines or research evidence.</p><p>MyFRIEND provides aspirational guidance on how to use guidelines optimally in decision-making related to multimorbidity care. Some obstacles may remain in practice, including healthcare professionals’ capabilities and the resources and policies of health facilities or regions. These obstacles should be addressed in future decision-making processes, but they are not considered in this framework.</p>`,buttons:[['Start to use the framework','primary','go','q1'],['Practical examples of using MyFRIEND framework','light','go','examples']],progress:0,current:'Welcome'},
+ q1:{type:'question',section:'Need assessment',question:'Should multimorbidity management be considered for this individual?',instruction:'Please consider the four factors in Box 1 below when choosing your answer',explanation:`<p>When an individual seeks healthcare, it should be determined whether multimorbidity needs to be considered in her/his care. In addition to individuals with multiple chronic conditions, some individuals who do not strictly fulfil this definition may also have undiagnosed conditions, risk factors for comorbidities, co-existing acute diseases that interact with chronic conditions, or fatal conditions requiring compassionate care.</p><p>If a person has at least one of the factors listed in Box 1, healthcare professionals should consider, together with the individual, applying principles of multimorbidity management throughout the care. If there is no need for multimorbidity management, or none of the listed risk factors are present, management can follow the usual single disease pathway focusing on the primary reason for the healthcare visit.</p><p>The way to include multimorbidity management may differ between care settings. In primary care it may be a priority issue; in higher-level or specialist care, multimorbidity may not be the main focus but still needs to be considered to reduce potential risks such as treatment interactions.</p>`,inlineCriteria:{title:'Box 1',content:box1},yes:'q2',no:'summary_single',progress:12,current:'Should multimorbidity management be considered?'},
+ single:{type:'action',section:'Action',action:'Follow the common single disease care pathway',explanation:`<p>After assessment, individuals who will not benefit from multimorbidity management can follow the common single disease care pathway. However, the individual’s situation needs to be reassessed regularly. If there are any major changes in health, the need for multimorbidity management should be considered again.</p>`,next:'summary',progress:100,current:'Single disease care pathway'},
+ q2:{type:'question',section:'Overall care',question:'Has a plan or general approach for multimorbidity management already been established?',explanation:`<p>In multimorbidity management, it is essential to have a long-term individual care plan, or at least a general plan on how multimorbidity is addressed in healthcare. The management of any disease should be based on this plan or approach.</p><p>The general approach can be applicable for multimorbidity management regardless of the specific situation, or tailored for different individuals or situations. If such a health care plan or approach was already identified during previous care episodes, or is part of the general policy of the facility, the care should be planned accordingly and the next step is to find guidelines/guidances for the management of the specific target diseases. If not, it is necessary to first search and review health-centred multimorbidity guidelines/guidances and set up a plan or approach.</p>`,yes:'q4',no:'q3',progress:25,current:'Existing multimorbidity plan or approach'},
+ q3:{type:'question',section:'Overall care',question:'Is there a health-centred guideline/guidance applicable for the setting?',explanation:`<p>When planning the practical implementation of multimorbidity management, the first step is to select a guideline/guidance that addresses multimorbidity itself and can guide the organization of the entire healthcare process with focus on the individual rather than the disease(s).</p><p>The selected guidelines/guidances should be applicable to the healthcare setting in question. If such a guideline/guidance exists, healthcare professionals can follow it to plan the overall care. If no health-centred multimorbidity guideline/guidance is available for this setting, providers should search, select and refer to health-centred multimorbidity guidelines/guidances and other sources broadly, and potentially establish an internal policy for the facility.</p>`,yes:'hc_yes',no:'hc_no',progress:38,current:'Applicable health-centred guideline/guidance'},
+ hc_yes:{type:'action',section:'Action point: Overall care',action:'Follow the health-centred multimorbidity guideline/guidance to coordinate the care',explanation:`<p>Healthcare professionals should refer to the health-centred multimorbidity guideline/guidance in the coordination of care if it already exists and has been shown to be applicable. The target population should be defined clearly: if the guideline/guidance is restricted to a certain population group, it may not be suitable for other populations.</p><p>The guideline/guidance should cover the relevant steps of the Ariadne principle: interaction assessment; patients’ preferences, prioritization and goal setting; individualized management; and monitoring and follow up. It will be used to plan care from the perspective of multimorbidity and to support interprofessional collaboration and shared decision-making.</p>`,next:'q4',progress:50,current:'Follow health-centred guidance'},
+ hc_no:{type:'action',section:'Action point: Overall care',action:'Search guidelines/guidances broadly, select and refer to the most applicable one(s), or consider developing a practice statement',explanation:`<p>When no health-centred multimorbidity guideline/guidance exists for the given setting and situation, healthcare professionals should search such guidelines/guidances from online databases or by referring to recent systematic reviews, assess applicability, and select the guideline/guidance or set of guidelines/guidances that is best applicable.</p><p>If none of the existing health-centred multimorbidity guidelines is suitable, healthcare professionals can develop their own practice statement or agree on overall principles for managing multimorbid individuals in the facility. The selected or developed guidance should cover the relevant steps of the Ariadne principle and support interprofessional collaboration and shared decision-making.</p>`,next:'q4',progress:50,current:'Search or develop health-centred guidance'},
+ q4:{type:'question',section:'Disease-specific care',question:'Is there a disease-centred multimorbidity guideline/guidance or recommendations for the relevant combination of conditions?',explanation:`<p>Healthcare providers should first search for guidelines/guidances that address the exact combination of all comorbidities that the individual has, or single disease guidelines/guidances with recommendations that address this combination. The choice of guideline libraries should follow institutional policy and may be assisted by computerized search instruments or large language models.</p><p>If such guidelines/guidances or recommendations exist, the next step is to evaluate their usability for this individual. If there are no or not enough disease-centred multimorbidity guidelines/guidances or related recommendations for the combination, healthcare professionals need to look for single-disease guidelines/guidances for all conditions. This also covers situations where existing guidance covers only some, but not all, of the individual’s conditions.</p>`,yes:'q5',no:'q6',progress:62,current:'Disease-centred multimorbidity guidance'},
+ q5:{type:'question',section:'Disease-specific care',question:'Are the existing guidelines/guidances suitable?',instruction:'Please consider the five factors in Box 2 below when choosing your answer',explanation:`<p>Even if guidelines or recommendations exist for the target disease combination, their suitability should be carefully considered. This includes factors related to the guideline/guidance itself and to the specific situation.</p><p>Box 2 lists factors to assess suitability, including guideline quality, applicability, feasibility and acceptability. It also requires that the guidelines properly address multimorbidity rather than merely mentioning common comorbidities.</p><p>Existing tools or approaches may support this assessment, such as AGREE II for methodological quality, RIGHT for reporting completeness, PICOS for consistency between recommendation and clinical question, and consideration of cost-effectiveness, resources, policy requirements, and acceptability to both the healthcare seeker and healthcare professional.</p>`,inlineCriteria:{title:'Box 2',content:box2},yes:'summary_primary',no:'q6',progress:72,current:'Suitability of existing guidance'},
+ q6:{type:'question',section:'Disease-specific care',question:'Are there existing guidelines/guidances for all diseases and conditions of the individual?',explanation:`<p>When no specific guideline/guidance or recommendations are available for the exact disease combination, or existing guidelines/guidances are otherwise not suitable, guidelines for the relevant conditions should be consulted. These may include single-disease guidelines for different conditions, or disease-centred multimorbidity guidelines/guidances for combinations of some but not all conditions.</p><p>In the absence of guidelines, other single-disease guidance documents can also be considered. If guidelines exist for all comorbidities, healthcare professionals should next consider potential interactions between recommendations. If guidelines are available for only some or none of the conditions, healthcare professionals should consider different factors to guide their decisions.</p>`,yes:'q7',no:'summary_multiple',progress:82,current:'Guidance for all conditions'},
+ q7:{type:'question',section:'Disease-specific care',question:'Could there be possible interactions/conflicts between recommendations?',explanation:`<p>Interactions or conflicts may exist between recommendations for different diseases. These can involve drug therapies, disease effects, diet, supplements, non-drug therapies, and other components. Multiple regular medicines may also be harmful even without explicit pharmacological interactions because of risks such as allergic reactions, overdose, and cumulative effects.</p><p>Some recommendations may conflict: for example, a drug therapy may be beneficial for one condition but harmful for another. Healthcare professionals should first refer to the health-centred multimorbidity guideline/guidance for further guidance on assessing and managing interactions and conflicts. Drug prescribing appropriateness criteria, computerized prescribing tools, or decision support systems may help identify potential interactions.</p><p>If interactions or conflicts are expected, decisions should be based on multiple considerations, and advice from a clinical pharmacologist or clinical pharmacist should be sought in complicated cases. If no interactions or conflicts are likely, healthcare workers can make decisions based on current guidelines/guidances or recommendations.</p>`,yes:'summary_multiple',no:'summary_primary',progress:92,current:'Potential interactions or conflicts'},
+ summary_single:{type:'summary',section:'Action point: Disease-specific care',action:'Follow the common single disease care pathway',explanation:`<p>After assessment, individuals who will not benefit from multimorbidity management can follow the common single disease care pathway. However, the individual’s situation needs to be reassessed regularly. If there are any major changes in health, the need for multimorbidity management should be considered again.</p>`,progress:100,current:'Final recommendation'},
+ summary_primary:{type:'summary',section:'Action point: Disease-specific care',action:'Use primarily recommendations from the guideline/guidance, together with clinical judgement and consideration of patients’ values and preferences, to make decisions.',explanation:`<p>When guidelines/guidance or recommendations can directly guide clinical practice, healthcare professionals can use these as the basis of decision-making according to evidence-based medicine principles. The recommendations in health-centred multimorbidity guidance should also be followed, particularly to integrate clinical experience and ensure that everyone involved in care is aware of and agrees with the decisions.</p><p>Even when recommendations are applicable, healthcare professionals should always consider the individual’s situation using their experience, expertise and clinical judgement, with careful consideration of preferences, and adapt care if necessary.</p>`,progress:100,current:'Final recommendation'},
+ summary_multiple:{type:'summary',section:'Action point: Disease-specific care',action:'Make decisions based on multiple considerations referring to different guidelines, other sources and clinical experience, paying attention to any potential conflicts or interactions.',explanation:`<p>If a guideline is available for the primary target condition, decisions can be made based on its recommendations, in collaboration with specialists treating the comorbidities. Current medication use, preferences, prioritization and goal setting, and potential interactions should be carefully considered.</p><p>If time and resources allow, research literature can be searched for new evidence for the disease combination. If no guidelines are available for the primary target condition(s), decisions should be based on other guidance documents, available guidelines/guidances on other comorbidities, experience, research literature, indirect evidence, and thorough consideration of benefits, harms, and interactions.</p>`,progress:100,current:'Final recommendation'},
+ examples:{type:'examples',section:'Practical examples',title:'Practical examples of how to use the MyFRIEND framework',progress:0,current:'Practical examples'},
+ case1:{type:'case',section:'Practical example',title:caseTitles.case1,content:caseContents.case1,progress:100,current:'Practical example'},
+ case2:{type:'case',section:'Practical example',title:caseTitles.case2,content:caseContents.case2,progress:100,current:'Practical example'},
+ case4:{type:'case',section:'Practical example',title:caseTitles.case4,content:caseContents.case4,progress:100,current:'Practical example'},
+ case5:{type:'case',section:'Practical example',title:caseTitles.case5,content:caseContents.case5,progress:100,current:'Practical example'}
+};
+let current='welcome'; let history=[]; let caseReturn=null;
+function typeBadge(type){return type==='question'?'question':type==='action'||type==='summary'?'action':'info'}
+function buildFinalSummary(n){
+ const overallActions=[];
+ history.forEach(h=>{
+   const hn=nodes[h.node];
+   if(hn && hn.type==='action' && hn.section==='Action point: Overall care' && !overallActions.includes(hn.action)){
+     overallActions.push(hn.action);
+   }
+ });
+ const overallHtml=overallActions.length
+   ? `<div class="summaryCard summaryActionCard"><h4>Action point 1: Overall care</h4>${overallActions.map(a=>`<p>${a}</p>`).join('')}</div>`
+   : '';
+ const diseaseHtml=`<div class="summaryCard summaryActionCard"><h4>Action point 2: Disease-specific care</h4><p>${n.action}</p></div>`;
+ const reassessmentHtml=`<div class="summaryCard summaryReassessCard"><h4>Reassessment</h4><p><b>Reassess the situation regularly or whenever there is a change in the conditions.</b></p>${reassessmentText}</div>`;
+ return `<div class="summaryBox"><h3>Summary</h3>${overallHtml}${diseaseHtml}${reassessmentHtml}</div>`;
+}
+function render(){const n=nodes[current];document.querySelector('.bar')?.remove();let html=`<span class="badge ${typeBadge(n.type)}">${n.section}</span><h2 class="title">${n.title||n.section}</h2><div class="progress"><div class="bar" style="width:${n.progress||0}%"></div></div><div class="progressText">Progress: ${n.progress||0}%</div>`;
+ if(n.type==='question'){html+=`<div class="questionBox"><p class="questionText">${n.question}</p><div class="hint">${n.instruction||'Choose the option that best fits the current individual and care setting.'}</div>${n.inlineCriteria?`<div class="criteriaBox"><h3>${n.inlineCriteria.title}</h3><div class="modalContent">${n.inlineCriteria.content}</div></div>`:''}</div><div class="btns"><button class="btn yes" onclick="answer('Yes','${n.yes}')">Yes</button><button class="btn no" onclick="answer('No','${n.no}')">No</button><button class="btn light" onclick="openModal('Explanation', nodes[current].explanation)">Explanation</button>${history.length?`<button class="btn ghost" onclick="back()">Back</button>`:''}</div>`}
+ else if(n.type==='action'){html+=`<div class="actionBox"><p class="actionText">${n.action}</p></div><div class="btns"><button class="btn primary" onclick="go('${n.next}')">Continue</button><button class="btn light" onclick="openModal('Explanation', nodes[current].explanation)">Explanation</button>${history.length?`<button class="btn ghost" onclick="back()">Back</button>`:''}</div>`}
+ else if(n.type==='summary'){html+=`<div class="actionBox"><p class="actionText">${n.action}</p></div><div class="reassessBox"><h3>Reassess the situation regularly or whenever there is a change in the conditions.</h3>${reassessmentText}</div><div class="btns"><button class="btn primary" onclick="openSummary()">Summary</button><button class="btn light" onclick="go('examples')">Practical examples</button><button class="btn light" onclick="openModal('Explanation', nodes[current].explanation)">Explanation</button>${history.length?`<button class="btn ghost" onclick="back()">Back</button>`:''}<button class="btn ghost" onclick="restart()">Restart</button></div>`}
+ else if(n.type==='examples'){html+=`<p class="desc">Select a case to see how the MyFRIEND framework can be applied in practice.</p><div class="examplesLanding"><div class="caseGrid"><button class="caseBtn" onclick="goCase('case1')">${caseTitles.case1}</button><button class="caseBtn" onclick="goCase('case2')">${caseTitles.case2}</button><button class="caseBtn" onclick="goCase('case4')">${caseTitles.case4}</button><button class="caseBtn" onclick="goCase('case5')">${caseTitles.case5}</button></div></div><div class="btns"><button class="btn ghost" onclick="restart()">Back to Welcome</button></div>`}
+ else if(n.type==='case'){html+=`<p class="desc">This page presents a practical example illustrating how the MyFRIEND framework can be applied.</p><div class="caseContent">${n.content}</div><div class="btns"><button class="btn ghost" onclick="backToExamples()">Back to practical examples</button><button class="btn primary" onclick="restart()">Restart</button></div>`}
+ else {html+=`<div class="desc">${n.body}</div><div class="btns">${n.buttons.map(b=>`<button class="btn ${b[1]}" onclick="go('${b[3]}')">${b[0]}</button>`).join('')}</div>`}
+ document.getElementById('main').innerHTML=html; renderPath();}
+function answer(ans,next){const n=nodes[current];history.push({node:current,section:n.section,question:n.question||n.action||n.title,answer:ans});current=next;render();}
+function go(next){const n=nodes[current]; if(n.type==='action'){history.push({node:current,section:n.section,question:n.action,answer:'Continue'});} current=next;render();}
+function back(){if(!history.length){current='welcome';render();return} const last=history.pop(); current=last.node; render();}
+function restart(){history=[];caseReturn=null;current='welcome';render();}
+function goCase(id){caseReturn=current;current=id;render();}
+function backToExamples(){current=caseReturn||'examples';caseReturn=null;render();}
+function renderPath(){
+ const el=document.getElementById('path');
+ const sideTitle=document.getElementById('sideTitle');
+ const n=nodes[current];
+ if(n && n.type==='summary'){
+   sideTitle.textContent='Decision completed ✓';
+   el.innerHTML=`<div class="pathItem done"><div class="pathSection">Need assessment</div><div class="pathQ">Completed</div></div>
+   <div class="pathItem done"><div class="pathSection">Overall care</div><div class="pathQ">Completed where applicable</div></div>
+   <div class="pathItem done"><div class="pathSection">Disease-specific care</div><div class="pathQ">Completed where applicable</div></div>
+   <div class="pathItem current"><div class="pathSection">Summary</div><div class="pathQ">Final recommendation generated</div></div>`;
+   return;
+ }
+ if(n && n.type==='examples'){
+   sideTitle.textContent='Practical examples';
+   el.innerHTML=`<div class="pathItem current"><div class="pathSection">Examples</div><div class="pathQ">Choose a practical case</div></div>`;
+   return;
+ }
+ if(n && n.type==='case'){
+   sideTitle.textContent='Practical example';
+   el.innerHTML=`<div class="pathItem done"><div class="pathSection">Practical examples</div><div class="pathQ">Case selected</div></div>
+   <div class="pathItem current"><div class="pathSection">Example</div><div class="pathQ">${n.title}</div></div>`;
+   return;
+ }
+ sideTitle.textContent='Decision Path';
+ if(!history.length&&current==='welcome'){el.innerHTML='<div class="empty">No decisions yet. Choose an option on the Welcome page.</div>';return}
+ let items=history.map(h=>`<div class="pathItem done"><div class="pathSection">${h.section}</div><div class="pathQ">${h.question}</div><span class="pathA ${h.answer==='Yes'?'y':h.answer==='No'?'n':''}">${h.answer}</span></div>`).join('');
+ if(current!=='welcome') items+=`<div class="pathItem current"><div class="pathSection">Current step</div><div class="pathQ">${n.question||n.action||n.title||n.current}</div></div>`;
+ el.innerHTML=items;
+}
+function openSummary(){
+ const n=nodes[current];
+ if(!n || n.type!=='summary') return;
+ openModal('Summary', buildFinalSummary(n).replace('<div class="summaryBox"><h3>Summary</h3>','').replace(/<\/div>$/,''));
+}
+function openModal(title,content){document.getElementById('modalTitle').textContent=title;document.getElementById('modalContent').innerHTML=content;document.getElementById('modalBackdrop').style.display='flex'}
+function closeModal(){document.getElementById('modalBackdrop').style.display='none'}
+function backdropClose(e){if(e.target.id==='modalBackdrop')closeModal()}
+render();
+</script>
+</body>
+</html>
