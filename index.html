@@ -275,7 +275,8 @@ function buildFinalSummary(n){
  const overallHtml=overallActions.length
    ? `<div class="summaryCard summaryActionCard"><h4>Action point 1: Overall care</h4>${overallActions.map(a=>`<p>${a}</p>`).join('')}</div>`
    : '';
- const diseaseHtml=`<div class="summaryCard summaryActionCard"><h4>Action point 2: Disease-specific care</h4><p>${n.action}</p></div>`;
+ const diseaseHeading=overallActions.length ? 'Action point 2: Disease-specific care' : 'Disease-specific care';
+ const diseaseHtml=`<div class="summaryCard summaryActionCard"><h4>${diseaseHeading}</h4><p>${n.action}</p></div>`;
  const reassessmentHtml=`<div class="summaryCard summaryReassessCard"><h4>Reassessment</h4><p><b>Reassess the situation regularly or whenever there is a change in the conditions.</b></p>${reassessmentText}</div>`;
  return `<div class="summaryBox"><h3>Summary</h3>${overallHtml}${diseaseHtml}${reassessmentHtml}</div>`;
 }
